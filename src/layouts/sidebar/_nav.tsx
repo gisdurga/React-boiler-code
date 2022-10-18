@@ -1,5 +1,4 @@
 import React from "react";
-import Dashboard from "@mui/icons-material/Dashboard";
 import LocationCity from "@mui/icons-material/LocationCity";
 import Add from "@mui/icons-material/Add";
 import HolidayVillage from "@mui/icons-material/HolidayVillage";
@@ -7,12 +6,6 @@ import List from "@mui/icons-material/List";
 import Person from "@mui/icons-material/Person";
 
 const _nav = [
-  {
-    component: "",
-    name: "Dashboard",
-    to: "/dashboard",
-    icon: <Dashboard />,
-  },
   {
     component: "",
     name: "Companies",
