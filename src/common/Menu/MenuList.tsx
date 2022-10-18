@@ -2,22 +2,14 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { onSignout } from "../../app/redux/actions/action";
-import { NavLink } from "react-router-dom";
 
 export default function MenuList({ menuList, anchorEl }: any) {
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const logout = () => {
-        dispatch(onSignout());
-        sessionStorage.removeItem("userToken");
-        localStorage.clear();
-        navigate("/login");
-      }
-      
     return (
         <Menu
         anchorEl={anchorEl}
@@ -54,10 +46,15 @@ export default function MenuList({ menuList, anchorEl }: any) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        
+
        { menuList && menuList.map((item:any, index:any) => (
-          item.name == "Logout" ? 
-            <MenuItem key={index} onClick={logout}><ListItemIcon>{item.icon}</ListItemIcon> {item.name} </MenuItem> :<MenuItem key={index} ><NavLink  to={item.link} style={{ textDecoration: "none" ,color: "black"}}>  <ListItemIcon>{item.icon}  </ListItemIcon>{item.name} </NavLink></MenuItem>
+          item.name === "Logout"
+            ? <MenuItem key={index} onClick={() => {
+              dispatch(onSignout());
+              sessionStorage.removeItem("userToken");
+              localStorage.clear();
+              navigate("/login");
+            }}><ListItemIcon>{item.icon}</ListItemIcon> {item.name} </MenuItem> : <MenuItem key={index} ><NavLink to={item.link} style={{ textDecoration: "none", color: "black" }}>  <ListItemIcon>{item.icon}  </ListItemIcon>{item.name} </NavLink></MenuItem>
         ))}
       </Menu>
     );

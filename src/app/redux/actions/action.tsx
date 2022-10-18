@@ -1,7 +1,6 @@
 import { post } from "../../../helpers/fetch-Service-Methods";
 import { BASE_URL } from "../../../config/config";
 import { loginSuccess, signout } from "../reducers/loginReducer";
-import { UserSuccess } from "../reducers/dashboardReducer";
 import ENDPOINT from "../../../helpers/Api";
 
 let userInfo:any = {
@@ -27,19 +26,6 @@ export const onLogin:any = (user:any) => async (dispatch:any) => {
 export const onSignout:any = () => async (dispatch:any) => {
   try {
     return dispatch(signout());
-  } catch (e:any) {
-    return console.error(e.message);
-  }
-};
-
-export const getAllUser:any = (usercompID:any) => async (dispatch:any) => {
-  try {
-    const comID = usercompID.companyId;
-        const response = await post(BASE_URL + ENDPOINT.TOTAL_USERS, { companyId: comID });
-        if (response.status) {
-          userInfo = response.data;
-        }
-    return dispatch(UserSuccess(userInfo));
   } catch (e:any) {
     return console.error(e.message);
   }

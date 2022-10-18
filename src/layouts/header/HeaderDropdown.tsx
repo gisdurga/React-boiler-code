@@ -8,14 +8,12 @@ import Person from "@mui/icons-material/Person";
 import Logout from "@mui/icons-material/Logout";
 import Avatar from "@mui/material/Avatar";
 import MenuList from "../../common/Menu/MenuList";
-import Account from "../../feature/account/Account";
 
 const HeaderDropdown = () => {
-
   const user: any = useSelector((state: any) => state && state.signReducer && state.signReducer.entities);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  
+
   const menuListItem:any = [
     {
         name: "Account",
@@ -27,8 +25,8 @@ const HeaderDropdown = () => {
         name: "Logout",
         icon: <Logout fontSize="small" />,
         link: "",
-        component: ""
-        //action: logout(),
+        component: "",
+        // action: logout(),
     },
 ];
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -55,7 +53,7 @@ const HeaderDropdown = () => {
             <Person/>{user.userName}
           </IconButton>
         </Tooltip>
-     <MenuList menuList={menuListItem} anchorEl={anchorEl}/>
+     <MenuList menuList={menuListItem} anchorEl={anchorEl} />
     </React.Fragment>
   );
 };

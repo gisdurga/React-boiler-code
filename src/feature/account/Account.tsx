@@ -4,14 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { GridColumns, GridRowsProp } from "@mui/x-data-grid";
+import { GridRowsProp } from "@mui/x-data-grid";
 import Grid from "@mui/material/Grid";
 import accountService from "../../helpers/Services/account.service";
 import DataGridComponent from "../../common/datatable/DataGrid";
 
 const Account = () => {
   const [project, setProject] = useState<GridRowsProp>([]);
-  const [teams, setTeams] = useState<GridRowsProp>([]);
   const userinfo: any = useSelector((state: any) => state && state.signReducer && state.signReducer.entities);
 
   async function getProject() {
@@ -44,42 +43,8 @@ const Account = () => {
     },
   ];
 
-  async function getTeam() {
-    const res = await accountService.getTeams(userinfo);
-    if (res.status) setTeams(res.data);
-  }
-
-  const gridTeamColumns: GridColumns = [
-    {
-      headerName: "No.",
-      field: "id",
-      editable: false,
-    },
-    {
-      headerName: "Team Name",
-      field: "name",
-      editable: true,
-
-    },
-    {
-      headerName: "Team Manager",
-      field: "manager",
-      editable: true,
-      valueGetter: (params:any) => params.row.manager.email,
-
-    },
-    {
-      headerName: "Team Leader",
-      field: "teamleader",
-      editable: true,
-      valueGetter: (params:any) => params.row.teamleader.email,
-
-    },
-  ];
-
   useEffect(() => {
     getProject();
-    getTeam();
   }, []);
 
   return (
@@ -115,11 +80,6 @@ const Account = () => {
                 <Grid xs={3} className="p-1">:</Grid>
                 <Grid item xs={3} className="p-1">{userinfo.email}</Grid>
               </Grid>
-              <Grid container xs={9} className="left-content-around">
-                <Grid item xs={6} className="p-1 text-bold">Employee ID</Grid>
-                <Grid item xs={3} className="p-1">:</Grid>
-                <Grid item xs={3} className="p-1">{userinfo.employeeId}</Grid>
-              </Grid>
             </Grid>
 
 <Card sx={{ display: "flex" }}>
@@ -132,16 +92,7 @@ const Account = () => {
             <DataGridComponent columns={gridProjectColumns} items={project} />
 
             </CardContent></Box></Card>
-            <Card sx={{ display: "flex" }}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <CardContent sx={{ flex: "1 0 auto" }}>
-            <p style={{ float: "left", fontSize: "22px", fontWeight: 500 }} className="fw-bolder">My Teams </p>
-            <br />
-            <br />
-            <br />
-            <DataGridComponent columns={gridTeamColumns} items={teams} />
 
-            </CardContent></Box></Card>
           </CardContent>
         </Box>
       </Card>

@@ -1,0 +1,78 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "import",
+        "react"
+    ],
+    "extends": ["airbnb-base", "eslint:recommended", "plugin:react/recommended"],
+    "ignorePatterns": [
+        "public/",
+        "node_modules/"
+    ],
+    "settings" : {
+        "react" : {
+            "version": "detect"
+        },
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+    },
+    "rules": {
+        "indent": "off",
+        "global-require": 0 ,
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
+        "no-use-before-define": ["error", { "variables": false }],
+        "quotes": ["error", "double"],
+        "react/no-set-state": "off",
+        "react/jsx-uses-vars": "error",
+        "react/jsx-uses-react": "error",
+        "no-console": "off",
+        "no-underscore-dangle": "off",
+        "no-param-reassign": 0,
+        "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": 0,
+        "max-len": ["error", {"code": 1500, "tabWidth": 4 }],
+        "comma-dangle": [2, "always-multiline"],
+        "object-curly-newline": "off",
+        "no-trailing-spaces": 2,
+        "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+        "block-spacing": [2, "always"],
+        "arrow-spacing": [2, { "before": true, "after": true }],
+        "curly": [2, "multi-line"],
+        "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
+        "keyword-spacing": [2, { "before": true, "after": true }],
+        "comma-spacing": [2, { "before": false, "after": true }],
+        "comma-style": [2, "last"],
+        "no-await-in-loop":0,
+        "spaced-comment": [2, "always", { "line": { "markers": ["*package", "!", ","] }, "block": { "balanced": true, "markers": ["*package", "!", ","], "exceptions": ["*"] } }],
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+       ]
+      },
+      "env": {
+        "jest": true,
+        "browser": true
+      }
+      
+    // "trailing-comma": [true, {
+    //     "singleline": "never",
+    //     "multiline": {
+    //       "objects": "always",     
+    //       "arrays": "always",
+    //       "functions": "never",
+    //       "typeLiterals": "ignore"
+    //     }
+    //   }] 
+  }
